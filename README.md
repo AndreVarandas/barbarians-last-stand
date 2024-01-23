@@ -1,5 +1,7 @@
 # barbarians-last-stand
 
+![Barbarian's Last Stand](https://img.itch.zone/aW1nLzE0NzI2MTI5LnBuZw==/original/Xm%2FOSa.png)
+
 ⚔️ Barbarian's Last Stand is a simple 2d Fighting game.
 
 Play it on itch.io: [https://vvludum.itch.io/barbarians-last-stand](https://vvludum.itch.io/barbarians-last-stand)
