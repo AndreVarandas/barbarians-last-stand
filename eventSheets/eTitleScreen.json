@@ -1,0 +1,32 @@
+{
+	"name": "eTitleScreen",
+	"events": [
+		{
+			"eventType": "block",
+			"conditions": [
+				{
+					"id": "on-object-clicked",
+					"objectClass": "Mouse",
+					"sid": 131075387088763,
+					"parameters": {
+						"mouse-button": "left",
+						"click-type": "clicked",
+						"object-clicked": "PlayButton"
+					}
+				}
+			],
+			"actions": [
+				{
+					"id": "go-to-layout",
+					"objectClass": "System",
+					"sid": 157297637728251,
+					"parameters": {
+						"layout": "Main"
+					}
+				}
+			],
+			"sid": 299490931027726
+		}
+	],
+	"sid": 611703617749929
+}

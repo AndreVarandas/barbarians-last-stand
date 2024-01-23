@@ -1,0 +1,764 @@
+{
+	"name": "ePlayer",
+	"events": [
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Passive",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-tick",
+							"objectClass": "System",
+							"sid": 172117972737404
+						}
+					],
+					"actions": [
+						{
+							"id": "set-position",
+							"objectClass": "Player_Mask",
+							"sid": 588430997095380,
+							"parameters": {
+								"x": "Player_Base.X",
+								"y": "Player_Base.Y"
+							}
+						}
+					],
+					"sid": 448085776379073
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 804269302904218
+						}
+					],
+					"actions": [
+						{
+							"id": "move-to-top",
+							"objectClass": "Player_Mask",
+							"sid": 298626970278932
+						}
+					],
+					"sid": 863485828735218
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "compare-two-values",
+							"objectClass": "System",
+							"sid": 221986520606568,
+							"parameters": {
+								"first-value": "Player_Mask.Health",
+								"comparison": 0,
+								"second-value": "0"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-ignoring-input",
+							"objectClass": "Player_Base",
+							"sid": 183462264768937,
+							"behaviorType": "Platform",
+							"parameters": {
+								"input": "start-ignoring"
+							}
+						},
+						{
+							"id": "set-animation",
+							"objectClass": "Player_Mask",
+							"sid": 709685995017417,
+							"parameters": {
+								"animation": "\"DEATH\"",
+								"from": "beginning"
+							}
+						},
+						{
+							"id": "wait",
+							"objectClass": "System",
+							"sid": 535569742273157,
+							"parameters": {
+								"seconds": "3"
+							}
+						},
+						{
+							"id": "restart-layout",
+							"objectClass": "System",
+							"sid": 675243865395658
+						}
+					],
+					"sid": 247940219507667
+				}
+			],
+			"sid": 725704426330666
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Player Engine",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Player Input",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "key-is-down",
+									"objectClass": "Keyboard",
+									"sid": 171070948055282,
+									"parameters": {
+										"key": 68
+									}
+								},
+								{
+									"id": "key-is-down",
+									"objectClass": "Keyboard",
+									"sid": 720604312291667,
+									"parameters": {
+										"key": 65
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 870355839668801,
+									"parameters": {
+										"animation": "\"DEATH\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 994759831891724,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "Player_Move",
+									"sid": 900021371132385,
+									"parameters": [
+										"\"Right\""
+									]
+								}
+							],
+							"sid": 685474014630685,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "trigger-once-while-true",
+											"objectClass": "System",
+											"sid": 651366311478786
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "Player_Turn",
+											"sid": 709970451482068,
+											"parameters": [
+												"\"Right\""
+											]
+										}
+									],
+									"sid": 724265392673310
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "key-is-down",
+									"objectClass": "Keyboard",
+									"sid": 724138854071562,
+									"parameters": {
+										"key": 65
+									}
+								},
+								{
+									"id": "key-is-down",
+									"objectClass": "Keyboard",
+									"sid": 575453314538680,
+									"parameters": {
+										"key": 68
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 471259923993581,
+									"parameters": {
+										"animation": "\"DEATH\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 367276238304966,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "Player_Move",
+									"sid": 897583592431129,
+									"parameters": [
+										"\"Left\""
+									]
+								}
+							],
+							"sid": 195527458646047,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "trigger-once-while-true",
+											"objectClass": "System",
+											"sid": 139742965705426
+										}
+									],
+									"actions": [
+										{
+											"callFunction": "Player_Turn",
+											"sid": 204722980710566,
+											"parameters": [
+												"\"Left\""
+											]
+										}
+									],
+									"sid": 674301892965680
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-key-pressed",
+									"objectClass": "Keyboard",
+									"sid": 361128733278628,
+									"parameters": {
+										"key": 87
+									}
+								},
+								{
+									"id": "is-on-floor",
+									"objectClass": "Player_Base",
+									"sid": 261255931709794,
+									"behaviorType": "Platform"
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "Player_Jump",
+									"sid": 545502121070770
+								}
+							],
+							"sid": 626710447743810
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-key-pressed",
+									"objectClass": "Keyboard",
+									"sid": 720888042867419,
+									"parameters": {
+										"key": 32
+									}
+								}
+							],
+							"actions": [
+								{
+									"callFunction": "Player_Attack",
+									"sid": 579819556180338
+								}
+							],
+							"sid": 856670708885017
+						},
+						{
+							"eventType": "comment",
+							"text": "Do something when the player is falling"
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "key-is-down",
+									"objectClass": "Keyboard",
+									"sid": 979612151310225,
+									"parameters": {
+										"key": 32
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-jumping",
+									"objectClass": "Player_Base",
+									"sid": 356659949881299,
+									"behaviorType": "Platform"
+								}
+							],
+							"actions": [],
+							"sid": 597752902740708
+						}
+					],
+					"sid": 443978063769179
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Player Functions",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"functionName": "Player_Move",
+							"functionDescription": "",
+							"functionCategory": "",
+							"functionReturnType": "none",
+							"functionCopyPicked": false,
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "direction",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 144938574319521
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 305299525521942,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 267393149351060,
+											"parameters": {
+												"first-value": "direction",
+												"comparison": 0,
+												"second-value": "\"Right\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Player_Base",
+											"sid": 601006628081038,
+											"behaviorType": "Platform",
+											"parameters": {
+												"control": "right"
+											}
+										}
+									],
+									"sid": 548163108415671
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 462330271539792,
+											"parameters": {
+												"first-value": "direction",
+												"comparison": 0,
+												"second-value": "\"Left\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "simulate-control",
+											"objectClass": "Player_Base",
+											"sid": 943503891132325,
+											"behaviorType": "Platform",
+											"parameters": {
+												"control": "left"
+											}
+										}
+									],
+									"sid": 807837747173737
+								}
+							]
+						},
+						{
+							"functionName": "Player_Turn",
+							"functionDescription": "",
+							"functionCategory": "",
+							"functionReturnType": "none",
+							"functionCopyPicked": false,
+							"functionIsAsync": false,
+							"functionParameters": [
+								{
+									"name": "direction",
+									"type": "string",
+									"initialValue": "",
+									"comment": "",
+									"sid": 293086320264310
+								}
+							],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [],
+							"sid": 492554751163635,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 226700969603745,
+											"parameters": {
+												"first-value": "direction",
+												"comparison": 0,
+												"second-value": "\"Right\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-mirrored",
+											"objectClass": "Player_Mask",
+											"sid": 827382248258744,
+											"parameters": {
+												"state": "not-mirrored"
+											}
+										}
+									],
+									"sid": 151510097291761
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 438993189261941,
+											"parameters": {
+												"first-value": "direction",
+												"comparison": 0,
+												"second-value": "\"Left\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-mirrored",
+											"objectClass": "Player_Mask",
+											"sid": 585600997456718,
+											"parameters": {
+												"state": "mirrored"
+											}
+										}
+									],
+									"sid": 988174832179366
+								}
+							]
+						},
+						{
+							"functionName": "Player_Jump",
+							"functionDescription": "",
+							"functionCategory": "",
+							"functionReturnType": "none",
+							"functionCopyPicked": false,
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "simulate-control",
+									"objectClass": "Player_Base",
+									"sid": 974148329949894,
+									"behaviorType": "Platform",
+									"parameters": {
+										"control": "jump"
+									}
+								}
+							],
+							"sid": 394885366397063
+						},
+						{
+							"functionName": "Player_Attack",
+							"functionDescription": "",
+							"functionCategory": "",
+							"functionReturnType": "none",
+							"functionCopyPicked": false,
+							"functionIsAsync": false,
+							"functionParameters": [],
+							"eventType": "function-block",
+							"conditions": [],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Player_Mask",
+									"sid": 683807549740986,
+									"parameters": {
+										"animation": "\"ATTACK\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 270593186287522
+						}
+					],
+					"sid": 583130622649957
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Player Animations",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-on-floor",
+									"objectClass": "Player_Base",
+									"sid": 300215903642973,
+									"behaviorType": "Platform"
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 187685895847150,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 467528577885782,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-moving",
+											"objectClass": "Player_Base",
+											"sid": 741162757103992,
+											"behaviorType": "Platform",
+											"isInverted": true
+										},
+										{
+											"id": "is-animation-playing",
+											"objectClass": "Player_Mask",
+											"sid": 368284462916415,
+											"parameters": {
+												"animation": "\"DEATH\""
+											},
+											"isInverted": true
+										},
+										{
+											"id": "is-animation-playing",
+											"objectClass": "Player_Mask",
+											"sid": 832524404700220,
+											"parameters": {
+												"animation": "\"ATTACK\""
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Player_Mask",
+											"sid": 653126544856151,
+											"parameters": {
+												"animation": "\"IDLE\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 764326446520440
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-moving",
+											"objectClass": "Player_Base",
+											"sid": 903558024265040,
+											"behaviorType": "Platform"
+										},
+										{
+											"id": "is-by-wall",
+											"objectClass": "Player_Base",
+											"sid": 308342887603491,
+											"behaviorType": "Platform",
+											"parameters": {
+												"side": "right"
+											},
+											"isInverted": true
+										},
+										{
+											"id": "is-by-wall",
+											"objectClass": "Player_Base",
+											"sid": 498742919723338,
+											"behaviorType": "Platform",
+											"parameters": {
+												"side": "left"
+											},
+											"isInverted": true
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Player_Mask",
+											"sid": 406502261736194,
+											"parameters": {
+												"animation": "\"RUN\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 735525646687028
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-on-floor",
+									"objectClass": "Player_Base",
+									"sid": 769479737750312,
+									"behaviorType": "Platform",
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 656396205661258,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [],
+							"sid": 158119668475628,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-jumping",
+											"objectClass": "Player_Base",
+											"sid": 781179346718994,
+											"behaviorType": "Platform"
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Player_Mask",
+											"sid": 298552359779727,
+											"parameters": {
+												"animation": "\"JUMP\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 615994326746727
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "is-falling",
+											"objectClass": "Player_Base",
+											"sid": 619897897265896,
+											"behaviorType": "Platform"
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Player_Mask",
+											"sid": 693200914524026,
+											"parameters": {
+												"animation": "\"JUMP\"",
+												"from": "beginning"
+											}
+										}
+									],
+									"sid": 967089341695889
+								}
+							]
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "on-animation-finished",
+									"objectClass": "Player_Mask",
+									"sid": 788159255969079,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Player_Mask",
+									"sid": 761257908282681,
+									"parameters": {
+										"animation": "\"IDLE\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 156602288435603
+						}
+					],
+					"sid": 894238382436842
+				}
+			],
+			"sid": 228469126630593
+		}
+	],
+	"sid": 860241099062201
+}

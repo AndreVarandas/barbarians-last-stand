@@ -1,0 +1,539 @@
+{
+	"name": "eMain",
+	"events": [
+		{
+			"eventType": "variable",
+			"name": "Score",
+			"type": "number",
+			"initialValue": "0",
+			"comment": "",
+			"isStatic": false,
+			"isConstant": false,
+			"sid": 237388425963367
+		},
+		{
+			"eventType": "include",
+			"includeSheet": "ePlayer"
+		},
+		{
+			"eventType": "group",
+			"disabled": false,
+			"title": "Enemies",
+			"description": "",
+			"isActiveOnStart": true,
+			"children": [
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Enemy AI",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-moving",
+									"objectClass": "Enemy",
+									"sid": 825401555593964,
+									"behaviorType": "MoveTo"
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Enemy",
+									"sid": 931372395038692,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Enemy",
+									"sid": 172144013816689,
+									"parameters": {
+										"animation": "\"WALK\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 200037442980686
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "is-moving",
+									"objectClass": "Enemy",
+									"sid": 145533950425602,
+									"behaviorType": "MoveTo"
+								},
+								{
+									"id": "has-los-to-object",
+									"objectClass": "Enemy",
+									"sid": 705553618358154,
+									"behaviorType": "LineOfSight",
+									"parameters": {
+										"object": "Player_Base",
+										"image-point": "0"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "stop",
+									"objectClass": "Enemy",
+									"sid": 121872473081565,
+									"behaviorType": "MoveTo"
+								}
+							],
+							"sid": 168930366673940
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-los-to-object",
+									"objectClass": "Enemy",
+									"sid": 247367484758835,
+									"behaviorType": "LineOfSight",
+									"parameters": {
+										"object": "Player_Base",
+										"image-point": "0"
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Enemy",
+									"sid": 787377226963242,
+									"parameters": {
+										"animation": "\"HIT\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Enemy",
+									"sid": 617828916037277,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "move-to-object",
+									"objectClass": "Enemy",
+									"sid": 978694545006773,
+									"behaviorType": "MoveTo",
+									"parameters": {
+										"object": "Player_Base",
+										"image-point": "0",
+										"mode": "direct"
+									}
+								}
+							],
+							"sid": 635036810163748
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "has-los-to-object",
+									"objectClass": "Enemy",
+									"sid": 857872477944963,
+									"behaviorType": "LineOfSight",
+									"parameters": {
+										"object": "Player_Base",
+										"image-point": "0"
+									}
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Enemy",
+									"sid": 267526647985779,
+									"parameters": {
+										"animation": "\"HIT\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 472566527311039,
+									"parameters": {
+										"animation": "\"DEATH\""
+									},
+									"isInverted": true
+								},
+								{
+									"id": "is-animation-playing",
+									"objectClass": "Player_Mask",
+									"sid": 384522700362360,
+									"parameters": {
+										"animation": "\"ATTACK\""
+									},
+									"isInverted": true
+								}
+							],
+							"actions": [
+								{
+									"id": "set-animation",
+									"objectClass": "Enemy",
+									"sid": 953646070799277,
+									"parameters": {
+										"animation": "\"ATTACK\"",
+										"from": "beginning"
+									}
+								}
+							],
+							"sid": 982631003149791
+						}
+					],
+					"sid": 820061686730296
+				},
+				{
+					"eventType": "group",
+					"disabled": false,
+					"title": "Take Damage",
+					"description": "",
+					"isActiveOnStart": true,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "for-each",
+									"objectClass": "System",
+									"sid": 918015878853009,
+									"parameters": {
+										"object": "Enemy"
+									}
+								}
+							],
+							"actions": [],
+							"sid": 268556978372619,
+							"children": [
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-collision-with-another-object",
+											"objectClass": "Player_Mask",
+											"sid": 614564120669040,
+											"parameters": {
+												"object": "Enemy"
+											}
+										},
+										{
+											"id": "compare-animation-frame-tag",
+											"objectClass": "Player_Mask",
+											"sid": 598033278710614,
+											"parameters": {
+												"comparison": 0,
+												"tag": "\"HIT\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "set-animation",
+											"objectClass": "Enemy",
+											"sid": 470750394442240,
+											"parameters": {
+												"animation": "\"HIT\"",
+												"from": "beginning"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Enemy",
+											"sid": 169291000281898,
+											"parameters": {
+												"instance-variable": "Health",
+												"value": "Self.Health - 1"
+											}
+										}
+									],
+									"sid": 460462140623433
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "on-collision-with-another-object",
+											"objectClass": "Enemy",
+											"sid": 432059159664625,
+											"parameters": {
+												"object": "Player_Mask"
+											}
+										},
+										{
+											"id": "compare-animation-frame-tag",
+											"objectClass": "Enemy",
+											"sid": 420896822118773,
+											"parameters": {
+												"comparison": 0,
+												"tag": "\"HIT\""
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "flash",
+											"objectClass": "Player_Mask",
+											"sid": 593754127122482,
+											"behaviorType": "Flash",
+											"parameters": {
+												"on-time": "0.1",
+												"off-time": "0.1",
+												"duration": "1.0"
+											}
+										},
+										{
+											"id": "set-instvar-value",
+											"objectClass": "Player_Mask",
+											"sid": 981360696182599,
+											"parameters": {
+												"instance-variable": "Health",
+												"value": "Self.Health - 1"
+											}
+										}
+									],
+									"sid": 140847945514272
+								},
+								{
+									"eventType": "block",
+									"conditions": [
+										{
+											"id": "compare-two-values",
+											"objectClass": "System",
+											"sid": 197452426761361,
+											"parameters": {
+												"first-value": "Enemy.Health ",
+												"comparison": 0,
+												"second-value": "0"
+											}
+										}
+									],
+									"actions": [
+										{
+											"id": "destroy",
+											"objectClass": "Enemy",
+											"sid": 529256316622386
+										},
+										{
+											"id": "set-eventvar-value",
+											"objectClass": "System",
+											"sid": 948230664884006,
+											"parameters": {
+												"variable": "Score",
+												"value": "Score + 1"
+											}
+										},
+										{
+											"id": "set-text",
+											"objectClass": "ScoreSF",
+											"sid": 871079603019418,
+											"parameters": {
+												"text": "Score"
+											}
+										}
+									],
+									"sid": 138951778535356
+								}
+							]
+						}
+					],
+					"sid": 665607220266601
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "for-each",
+							"objectClass": "System",
+							"sid": 474023640840242,
+							"parameters": {
+								"object": "Enemy"
+							}
+						}
+					],
+					"actions": [],
+					"sid": 161059414035811,
+					"children": [
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 501432497208053,
+									"parameters": {
+										"first-value": "Enemy.X",
+										"comparison": 2,
+										"second-value": "Player_Base.X"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "Enemy",
+									"sid": 198098344751009,
+									"parameters": {
+										"state": "not-mirrored"
+									}
+								}
+							],
+							"sid": 683265447060019
+						},
+						{
+							"eventType": "block",
+							"conditions": [
+								{
+									"id": "compare-two-values",
+									"objectClass": "System",
+									"sid": 909827707636955,
+									"parameters": {
+										"first-value": "Enemy.X",
+										"comparison": 4,
+										"second-value": "Player_Base.X"
+									}
+								}
+							],
+							"actions": [
+								{
+									"id": "set-mirrored",
+									"objectClass": "Enemy",
+									"sid": 342729691024844,
+									"parameters": {
+										"state": "mirrored"
+									}
+								}
+							],
+							"sid": 656888729177798
+						}
+					]
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-any-animation-finished",
+							"objectClass": "Enemy",
+							"sid": 844170641936723
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "Enemy",
+							"sid": 788105856989429,
+							"parameters": {
+								"animation": "\"WALK\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 893872465668205
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "is-animation-playing",
+							"objectClass": "Player_Mask",
+							"sid": 124031620266950,
+							"parameters": {
+								"animation": "\"DEATH\""
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "set-animation",
+							"objectClass": "Enemy",
+							"sid": 373632783116806,
+							"parameters": {
+								"animation": "\"IDLE\"",
+								"from": "beginning"
+							}
+						}
+					],
+					"sid": 331130088071558
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "on-start-of-layout",
+							"objectClass": "System",
+							"sid": 321633046753766
+						}
+					],
+					"actions": [
+						{
+							"id": "reset-global-variables",
+							"objectClass": "System",
+							"sid": 510164460750401
+						},
+						{
+							"id": "spawn-another-object",
+							"objectClass": "Enemy_Spawner",
+							"sid": 561948929306859,
+							"parameters": {
+								"object": "Enemy",
+								"layer": "0",
+								"image-point": "0",
+								"create-hierarchy": false
+							}
+						},
+						{
+							"id": "set-text",
+							"objectClass": "ScoreSF",
+							"sid": 562854645128676,
+							"parameters": {
+								"text": "Score"
+							}
+						}
+					],
+					"sid": 177847839746717
+				},
+				{
+					"eventType": "block",
+					"conditions": [
+						{
+							"id": "every-x-seconds",
+							"objectClass": "System",
+							"sid": 948867123530797,
+							"parameters": {
+								"interval-seconds": "10"
+							}
+						}
+					],
+					"actions": [
+						{
+							"id": "spawn-another-object",
+							"objectClass": "Enemy_Spawner",
+							"sid": 101960715025177,
+							"parameters": {
+								"object": "Enemy",
+								"layer": "0",
+								"image-point": "0",
+								"create-hierarchy": false
+							}
+						}
+					],
+					"sid": 253141796468846
+				}
+			],
+			"sid": 308669787374984
+		}
+	],
+	"sid": 674482725766625
+}
